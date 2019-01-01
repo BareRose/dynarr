@@ -69,7 +69,7 @@ int DYNARR_VALID(any*, int)
 void DYNARR_CLEAR(any*)
     clears given dynarr, setting its size to 0, O(1)
 void DYNARR_FREE(any*)
-    frees given dynarr and all its internal data, O(n)
+    frees given dynarr and all its internal data
 int DYNARR_PUSH(any*, any)
     appends the given element to the end of given dynarr (growing if needed), amortized O(1)
     returns the index the element was placed at, or -1 on allocation failure
