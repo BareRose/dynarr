@@ -135,17 +135,17 @@ void DYNARR_SORT_STD(any*, int(*)(const any*, const any*))
 #define DYNARR_SORT_INS(A, F) dynarrSortInsert(A, (int(*)(const void*, const void*))(F))
 #define DYNARR_SORT_STD(A, F) dynarrSortStandard(A, (int(*)(const void*, const void*))(F))
 #define DARR_RAW(A) (((struct dynarr*)(A))[-1])
-#define DARR_OFFS(A) (DARR_RAW(A).offs)
-#define DARR_SIZE(A) (DARR_RAW(A).size)
 #define DARR_CAPA(A) (DARR_RAW(A).capa)
 #define DARR_ELEM(A) (DARR_RAW(A).elem)
+#define DARR_OFFS(A) (DARR_RAW(A).offs)
+#define DARR_SIZE(A) (DARR_RAW(A).size)
 
 //includes
 #include <string.h> //memmove
 
 //structs
 struct dynarr {
-    int offs, size, capa, elem;
+    int capa, elem, offs, size;
 };
 
 //function declarations
