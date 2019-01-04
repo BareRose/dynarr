@@ -17,7 +17,7 @@ dynarr supports the following three configurations:
     Defines all dynarr functions as static, useful if dynarr is only used in a single compilation unit.
 
 dynarr supports the following additional options:
-#define DYNARR_NOASSERT
+#define DYNARR_NO_ASSERT
     Disables the use of assert in various dynarr functions, must be defined globally to work properly.
 #define DYNARR_ZALLOC(S)
     Overrides the zalloc function used by dynarr with your own. This is calloc but with just 1 argument.
@@ -106,7 +106,7 @@ void DYNARR_SORT_STD(any*, int(*)(const any*, const any*))
 */
 
 //macros
-#ifndef DYNARR_NOASSERT
+#ifndef DYNARR_NO_ASSERT
     #include <assert.h> //assert
     #define DARR_ASSERT(E) assert(E)
 #else
