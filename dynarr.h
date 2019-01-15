@@ -117,7 +117,7 @@ void DYNARR_SORT_STD(any*, int(*)(const any*, const any*))
 #define DYNARR_AT(A, I) (*(DARR_ASSERT(DYNARR_VALID(A, I)), &(A)[DARR_OFFS(A)+(I)]))
 #define DYNARR_FIRST(A) (*(DARR_ASSERT(DARR_SIZE(A)), &(A)[DARR_OFFS(A)]))
 #define DYNARR_LAST(A) (*(DARR_ASSERT(DARR_SIZE(A)), &(A)[DARR_OFFS(A)+DARR_SIZE(A)-1]))
-#define DYNARR_VALID(A, I) ((I >= 0)&&(I < DARR_SIZE(A)))
+#define DYNARR_VALID(A, I) (((I) >= 0)&&((I) < DARR_SIZE(A)))
 #define DYNARR_CLEAR(A) (DARR_OFFS(A) = DARR_SIZE(A) = 0, (void)0)
 #define DYNARR_FREE(A) dynarrFree(A)
 #define DYNARR_PUSH(A, V) (dynarrGrow((void**)&(A)) ? -1 : ((A)[DARR_OFFS(A)+DARR_SIZE(A)] = V, DARR_SIZE(A)++))
@@ -134,11 +134,11 @@ void DYNARR_SORT_STD(any*, int(*)(const any*, const any*))
 #define DYNARR_FIND_BIN(A, F, K) dynarrFindBinary(A, (int(*)(const void*, const void*))(F), K)
 #define DYNARR_SORT_INS(A, F) dynarrSortInsert(A, (int(*)(const void*, const void*))(F))
 #define DYNARR_SORT_STD(A, F) dynarrSortStandard(A, (int(*)(const void*, const void*))(F))
-#define DARR_RAW(A) (((struct dynarr*)(A))[-1])
-#define DARR_CAPA(A) (DARR_RAW(A).capa)
-#define DARR_ELEM(A) (DARR_RAW(A).elem)
-#define DARR_OFFS(A) (DARR_RAW(A).offs)
-#define DARR_SIZE(A) (DARR_RAW(A).size)
+#define DARR_RAW(A) ((struct dynarr*)(A))[-1]
+#define DARR_CAPA(A) DARR_RAW(A).capa
+#define DARR_ELEM(A) DARR_RAW(A).elem
+#define DARR_OFFS(A) DARR_RAW(A).offs
+#define DARR_SIZE(A) DARR_RAW(A).size
 
 //includes
 #include <string.h> //memmove
