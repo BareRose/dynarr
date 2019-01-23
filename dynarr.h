@@ -183,7 +183,7 @@ DARRDEF void dynarrSortStandard(void*, int(*)(const void*, const void*));
 //public functions
 DARRDEF void* dynarrNew (int elem) {
     //allocate new dynarr with space for one element
-    struct dynarr* darr = DYNARR_ZALLOC(sizeof(struct dynarr) + elem);
+    struct dynarr* darr = (struct dynarr*)DYNARR_ZALLOC(sizeof(struct dynarr) + elem);
     //check for allocation failure
     if (!darr) return NULL;
     //fill in values
@@ -204,7 +204,7 @@ DARRDEF int dynarrGrow (void** a) {
             DARR_OFFS(*a) = 0;
         } else {
             //double the available capacity by reallocation
-            void** ptr = DYNARR_REALLOC(&DARR_RAW(*a), sizeof(struct dynarr) + DARR_ELEM(*a)*DARR_CAPA(*a)*2);
+            void* ptr = DYNARR_REALLOC(&DARR_RAW(*a), sizeof(struct dynarr) + DARR_ELEM(*a)*DARR_CAPA(*a)*2);
             //check for realloc failure
             if (!ptr) return -1;
             //assign to dynarr pointer
@@ -233,7 +233,7 @@ DARRDEF int dynarrResize (void** a, int s) {
             //grow if offset reset not enough
             if (s > DARR_CAPA(*a)) {
                 //grow to exactly the requested size
-                void** ptr = DYNARR_REALLOC(&DARR_RAW(*a), sizeof(struct dynarr) + DARR_ELEM(*a)*s);
+                void* ptr = DYNARR_REALLOC(&DARR_RAW(*a), sizeof(struct dynarr) + DARR_ELEM(*a)*s);
                 //check for realloc failure
                 if (!ptr) return -1;
                 //assign to dynarr pointer
@@ -261,7 +261,7 @@ DARRDEF int dynarrCapacity (void** a, int c) {
     //adjust capacity if necessary
     if (c != DARR_CAPA(*a)) {
         //adjust capacity by reallocation
-        void** ptr = DYNARR_REALLOC(&DARR_RAW(*a), sizeof(struct dynarr) + DARR_ELEM(*a)*c);
+        void* ptr = DYNARR_REALLOC(&DARR_RAW(*a), sizeof(struct dynarr) + DARR_ELEM(*a)*c);
         //check for realloc failure
         if (!ptr) return -1;
         //assign to dynarr pointer
